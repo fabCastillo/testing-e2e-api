@@ -6,16 +6,16 @@ const image = Joi.string().uri();
 
 const createCategoryDto = Joi.object({
   name: name.required(),
-  image: image.required()
+  image: image.required(),
 });
 
 const updateCategoryDto = Joi.object({
-  name: name,
-  image: image
+  name,
+  image,
 });
 
 const getCategoryDto = Joi.object({
   id: id.required(),
 });
 
-module.exports = { createCategoryDto, updateCategoryDto, getCategoryDto }
+module.exports = { createCategoryDto, updateCategoryDto, getCategoryDto };

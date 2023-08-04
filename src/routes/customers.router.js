@@ -11,7 +11,7 @@ const {
 const router = express.Router();
 const service = new CustomerService();
 
-router.get('/',  async (req, res, next) => {
+router.get('/', async (req, res, next) => {
   try {
     res.json(await service.find());
   } catch (error) {
@@ -19,33 +19,36 @@ router.get('/',  async (req, res, next) => {
   }
 });
 
-router.post('/',
+router.post(
+  '/',
   validationHandler(createCustomerDto, 'body'),
   async (req, res, next) => {
     try {
-      const body = req.body;
+      const { body } = req;
       res.status(201).json(await service.create(body));
     } catch (error) {
       next(error);
     }
-  }
+  },
 );
 
-router.patch('/:id',
+router.patch(
+  '/:id',
   validationHandler(getCustomerDto, 'params'),
   validationHandler(updateCustomerDto, 'body'),
   async (req, res, next) => {
     try {
       const { id } = req.params;
-      const body = req.body;
+      const { body } = req;
       res.status(201).json(await service.update(id, body));
     } catch (error) {
       next(error);
     }
-  }
+  },
 );
 
-router.delete('/:id',
+router.delete(
+  '/:id',
   validationHandler(getCustomerDto, 'params'),
   async (req, res, next) => {
     try {
@@ -54,7 +57,7 @@ router.delete('/:id',
     } catch (error) {
       next(error);
     }
-  }
+  },
 );
 
 module.exports = router;

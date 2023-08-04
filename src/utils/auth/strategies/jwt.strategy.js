@@ -4,11 +4,9 @@ const { config } = require('../../../config/config');
 
 const options = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-  secretOrKey: config.jwtSecret
-}
+  secretOrKey: config.jwtSecret,
+};
 
-const JwtStrategy = new Strategy(options, (payload, done) => {
-  return done(null, payload);
-});
+const JwtStrategy = new Strategy(options, (payload, done) => done(null, payload));
 
 module.exports = JwtStrategy;

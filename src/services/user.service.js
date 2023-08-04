@@ -4,14 +4,12 @@ const bcrypt = require('bcrypt');
 const { models } = require('../db/sequelize');
 
 class UserService {
-  constructor() {}
-
   async create(data) {
     const hash = await bcrypt.hash(data.password, 10);
     const newUser = await models.User.create({
       ...data,
       password: hash,
-      role: "admin",
+      role: 'admin',
     });
     delete newUser.dataValues.password;
     return newUser;
@@ -19,14 +17,14 @@ class UserService {
 
   async find() {
     const rta = await models.User.findAll({
-      include: ['customer']
+      include: ['customer'],
     });
     return rta;
   }
 
   async findByEmail(email) {
     const rta = await models.User.findOne({
-      where: { email }
+      where: { email },
     });
     return rta;
   }

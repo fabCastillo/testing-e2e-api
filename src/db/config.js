@@ -1,4 +1,4 @@
-const { config } = require('./../config/config');
+const { config } = require('../config/config');
 
 module.exports = {
   development: {
@@ -10,8 +10,8 @@ module.exports = {
     dialect: 'postgres',
     dialectOptions: {
       ssl: {
-        rejectUnauthorized: false
-      }
-    }
-  }
-}
+        rejectUnauthorized: false,
+      },
+    },
+  },
+};

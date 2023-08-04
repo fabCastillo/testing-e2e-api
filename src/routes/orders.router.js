@@ -22,7 +22,7 @@ router.get(
     } catch (error) {
       next(error);
     }
-  }
+  },
 );
 
 router.post(
@@ -30,13 +30,13 @@ router.post(
   validatorHandler(createOrderDto, 'body'),
   async (req, res, next) => {
     try {
-      const body = req.body;
+      const { body } = req;
       const newOrder = await service.create(body);
       res.status(201).json(newOrder);
     } catch (error) {
       next(error);
     }
-  }
+  },
 );
 
 router.post(
@@ -44,13 +44,13 @@ router.post(
   validatorHandler(addItemDto, 'body'),
   async (req, res, next) => {
     try {
-      const body = req.body;
+      const { body } = req;
       const newItem = await service.addItem(body);
       res.status(201).json(newItem);
     } catch (error) {
       next(error);
     }
-  }
+  },
 );
 
 module.exports = router;

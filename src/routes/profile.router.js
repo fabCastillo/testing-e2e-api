@@ -8,21 +8,23 @@ const router = express.Router();
 const orderService = new OrderService();
 const userService = new UserService();
 
-router.get('/my-orders',
-  passport.authenticate('jwt', {session: false}),
+router.get(
+  '/my-orders',
+  passport.authenticate('jwt', { session: false }),
   async (req, res, next) => {
     try {
-      const user = req.user;
+      const { user } = req;
       const orders = await orderService.findByUser(user.sub);
       res.json(orders);
     } catch (error) {
       next(error);
     }
-  }
+  },
 );
 
-router.get('/my-user',
-  passport.authenticate('jwt', {session: false}),
+router.get(
+  '/my-user',
+  passport.authenticate('jwt', { session: false }),
   async (req, res, next) => {
     try {
       const userPayload = req.user;
@@ -31,7 +33,7 @@ router.get('/my-user',
     } catch (error) {
       next(error);
     }
-  }
+  },
 );
 
 module.exports = router;
