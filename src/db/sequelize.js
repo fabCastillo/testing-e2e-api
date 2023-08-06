@@ -5,7 +5,7 @@ const setupModels = require('./models');
 
 const options = {
   dialect: 'postgres',
-  logging: config.isProd ? false : console.log,
+  logging: config.env === 'dev' ? console.log : false,
 };
 
 if (config.isProd) {
@@ -16,6 +16,7 @@ if (config.isProd) {
   };
 }
 
+// @ts-ignore
 const sequelize = new Sequelize(config.dbUrl, options);
 
 setupModels(sequelize);

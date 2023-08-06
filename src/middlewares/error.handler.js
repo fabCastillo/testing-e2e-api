@@ -1,8 +1,9 @@
 /* eslint-disable no-unused-vars */
 const { ValidationError } = require('sequelize');
+const { config } = require('../config/config');
 
 function logErrors(err, req, res, next) {
-  console.error(err);
+  if (config.env === 'dev') console.log(err);
   next(err);
 }
 
