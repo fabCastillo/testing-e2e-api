@@ -1,5 +1,6 @@
 const request = require('supertest');
 const createApp = require('../src/app');
+const { models } = require('../src/db/sequelize');
 
 describe('tests for /users path', () => {
   let app = null;
@@ -12,8 +13,17 @@ describe('tests for /users path', () => {
     api = request(app);
   });
 
-  describe('GET /users', () => {
-    // tests for /users
+  describe('GET /users/{id}', () => {
+    test('should return a user', async () => {
+      const user = await models.User.findByPk(1);
+      // @ts-ignore
+      const { statusCode, body } = await api.get(`/api/v1/users/${user.id}`);
+      expect(statusCode).toBe(200);
+      // @ts-ignore
+      expect(body.id).toEqual(user.id);
+      // @ts-ignore
+      expect(body.email).toEqual(user.email);
+    });
   });
 
   describe('POST /users', () => {
